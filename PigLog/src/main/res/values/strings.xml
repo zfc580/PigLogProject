@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PigLog</string>
+    <string name="pig_drag_btn">拖动</string>
 </resources>
