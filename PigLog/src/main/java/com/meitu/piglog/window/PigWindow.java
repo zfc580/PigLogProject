@@ -56,9 +56,9 @@ public class PigWindow {
                 floatParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                 floatParams.gravity = Gravity.START | Gravity.TOP;
-                floatParams.width = 500;
-                floatParams.height = 500;
-                floatParams.x = screenWidth;
+                floatParams.width = WindowManager.LayoutParams.WRAP_CONTENT;;
+                floatParams.height = WindowManager.LayoutParams.WRAP_CONTENT;;
+                floatParams.x = screenWidth / 2;
                 floatParams.y = screenHeight / 2;
                 mFloatView.setPigWindowParams(floatParams);
             }

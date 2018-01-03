@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
-        android:id="@+id/pig_log_panel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/pig_float_panel"
+        android:visibility="gone"
+        android:layout_width="200dip"
+        android:layout_height="200dip">
         <Button
+            android:id="@+id/btn_float_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:text="关闭"/>
         <TextView
-            android:id="@+id/iv_pig_display"
+            android:id="@+id/tv_float_display"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="test test test"/>
     </RelativeLayout>
     <TextView
-        android:id="@+id/iv_pig_drag"
+        android:id="@+id/tv_float_drag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

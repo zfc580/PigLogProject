@@ -5,6 +5,7 @@ import com.meitu.piglogproject.app.main.activity.main.mvp.MainPresenter;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
 import com.meitu.piglogproject.app.main.activity.main.mvp.MainContract;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     // Fields
     // ===========================================================
     private Button mShowBtn, mHidenBtn;
-
+    private Handler mHandler = new Handler();
 
     // ===========================================================
     // Override Methods
@@ -34,15 +35,13 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.initPig(MainActivity.this);
+            }
+        });
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        Log.i("zhoufcai", "MainActivity onWindowFocusChanged hasFocus = "+hasFocus);
-        if(hasFocus){
-            mPresenter.initPig(MainActivity.this);
-        }
     }
 
     @Override

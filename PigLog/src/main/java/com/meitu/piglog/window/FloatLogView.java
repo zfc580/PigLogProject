@@ -3,9 +3,9 @@ package com.meitu.piglog.window;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
  * Useage: FloatLogView
  * Created by zfc<zfc@meitu.com> on 2018/1/3 - 11:25
  */
-public class FloatLogView extends RelativeLayout {
+public class FloatLogView extends RelativeLayout implements View.OnClickListener{
 
     // ===========================================================
     // Constants
@@ -28,8 +28,10 @@ public class FloatLogView extends RelativeLayout {
     // ===========================================================
     // Fields
     // ===========================================================
-    private TextView mDragButton;
+    private RelativeLayout mLogPanelLayout;
+    private TextView mDragView;
     private TextView mDisplayTextView;
+    private Button mCloseButton;
 
     private float xInScreen;
     private float yInScreen;
@@ -47,15 +49,35 @@ public class FloatLogView extends RelativeLayout {
     public FloatLogView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.pig_float_view, this);
-        mDragButton = (TextView) findViewById(R.id.iv_pig_drag);
-        mDisplayTextView = (TextView)findViewById(R.id.iv_pig_display);
+        mLogPanelLayout = (RelativeLayout)findViewById(R.id.pig_float_panel);
+        mDragView = (TextView) findViewById(R.id.tv_float_drag);
+        mDisplayTextView = (TextView)findViewById(R.id.tv_float_display);
+        mCloseButton = (Button) findViewById(R.id.btn_float_close);
+        mDragView.setOnClickListener(this);
+        mCloseButton.setOnClickListener(this);
+
     }
 
     // ===========================================================
     // Override Methods
     // ===========================================================
+
+
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public void onClick(View v) {
+        if(v.getId() == R.id.btn_float_close){
+            mLogPanelLayout.setVisibility(GONE);
+            mDragView.setVisibility(VISIBLE);
+
+        } else if(v.getId() == R.id.tv_float_drag){
+            mLogPanelLayout.setVisibility(VISIBLE);
+            mDragView.setVisibility(GONE);
+        }
+
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 xInView = event.getX();
@@ -76,9 +98,8 @@ public class FloatLogView extends RelativeLayout {
                 break;
 
         }
-        return super.onTouchEvent(event);
+        return super.dispatchTouchEvent(event);
     }
-
 
     // ===========================================================
     // Define Methods
