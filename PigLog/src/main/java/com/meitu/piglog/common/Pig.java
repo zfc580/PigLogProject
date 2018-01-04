@@ -1,8 +1,16 @@
 package com.meitu.piglog.common;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.meitu.piglog.window.PigWindow;
+
+import java.util.List;
 
 /**
  * Pig.java
@@ -21,14 +29,19 @@ public class Pig {
     // Fields
     // ===========================================================
     private Context mContext;
+    private Application mApplication;
     private static Pig mInstance;
     private PigWindow mPigWindow;
+    private PigActivityLifecycleCallbacks mLifecycleCallback;
 
     // ===========================================================
     // Constructor
     // ===========================================================
     public Pig(Context context){
         mContext = context.getApplicationContext();
+        mApplication = (Application)mContext;
+        mLifecycleCallback = new PigActivityLifecycleCallbacks();
+        mApplication.registerActivityLifecycleCallbacks(mLifecycleCallback);
     }
 
     // ===========================================================
@@ -44,8 +57,21 @@ public class Pig {
         }
     }
 
+    public static void destroyInstance(){
+        if(mInstance != null){
+            mInstance.destroy();
+            mInstance = null;
+        }
+    }
+
     public static Pig shareInstance(){
         return mInstance;
+    }
+
+    private void destroy(){
+        if(mApplication != null){
+            mApplication.unregisterActivityLifecycleCallbacks(mLifecycleCallback);
+        }
     }
 
     public void initPig(){
@@ -58,10 +84,68 @@ public class Pig {
         mPigWindow = null;
     }
 
+    private boolean isAppExit(){
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        List<ResolveInfo> packageInfos = mContext.getPackageManager().queryIntentActivities(intent, 0);
+        for (int i = packageInfos.size()-1; i >= 0; i--) {
+            String launcherActivityName = packageInfos.get(i).activityInfo.name;
+            String packageName = packageInfos.get(i).activityInfo.packageName;
+            Log.i("appappinfo", i + " -- launcherActivityName: " + launcherActivityName);
+            Log.i("appappinfo", i + " -- packageName: " + packageName);
+            if(packageName.equals(mContext.getPackageName())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
 
+    class PigActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks{
+
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityCreated activity = "+activity.getComponentName());
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStarted activity = "+activity.getComponentName());
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityResumed activity = "+activity.getComponentName());
+            mPigWindow.addFloatWindow();
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityPaused activity = "+activity.getComponentName());
+            mPigWindow.removeFloatWindow();
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStopped activity = "+activity.getComponentName());
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivitySaveInstanceState activity = "+activity.getComponentName());
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityDestroyed activity = "+activity.getComponentName());
+            if(isAppExit()){
+                destroyInstance();
+            }
+        }
+    }
 
     // ===========================================================
     // Getter & Setter

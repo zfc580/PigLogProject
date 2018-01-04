@@ -13,7 +13,7 @@ import android.widget.Button;
 /**
  * MainPresenter
  *
- * @author meitu at 2018/01/03.
+ * @author zfc at 2018/01/03.
  */
 
 public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> implements MainContract.View{
@@ -41,7 +41,6 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
                 mPresenter.initPig(MainActivity.this);
             }
         });
-
     }
 
     @Override

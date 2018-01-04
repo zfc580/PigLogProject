@@ -52,7 +52,7 @@ public class PigWindow {
 
             if (floatParams == null) {
                 floatParams = new WindowManager.LayoutParams();
-                floatParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+                floatParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
                 floatParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
                 floatParams.gravity = Gravity.START | Gravity.TOP;
@@ -72,7 +72,9 @@ public class PigWindow {
     }
 
     public void removeFloatWindow(){
-
+        if(mWindowManager != null){
+            mWindowManager.removeView(mFloatView);
+        }
     }
 
     public void printLog(String msg){
