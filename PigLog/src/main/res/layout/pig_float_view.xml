@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="#FFC0CB">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/pig_float_panel"
@@ -11,26 +10,28 @@
         android:visibility="gone"
         android:layout_width="250dip"
         android:layout_height="300dip">
-        <Button
+        <ImageView
             android:id="@+id/btn_float_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="关闭"/>
+            android:layout_marginTop="5dip"
+            android:layout_marginRight="5dip"
+            android:src="@mipmap/float_close_icon"/>
         <TextView
             android:id="@+id/tv_float_display"
-            android:layout_below="@+id/btn_float_close"
+            android:layout_toLeftOf="@+id/btn_float_close"
             android:textColor="@android:color/holo_red_light"
             android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text=""/>
     </RelativeLayout>
-    <TextView
+    <ImageView
         android:id="@+id/tv_float_drag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/pig_drag_btn" />
+        android:src="@mipmap/float_drag_icon" />
 </RelativeLayout>

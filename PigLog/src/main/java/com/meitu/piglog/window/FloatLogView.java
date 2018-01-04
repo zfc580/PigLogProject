@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -29,9 +30,9 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     // Fields
     // ===========================================================
     private RelativeLayout mLogPanelLayout;
-    private TextView mDragView;
     private TextView mDisplayTextView;
-    private Button mCloseButton;
+    private ImageView mCloseButton;
+    private ImageView mDragView;
 
     private float xInScreen;
     private float yInScreen;
@@ -50,9 +51,9 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
         super(context);
         LayoutInflater.from(context).inflate(R.layout.pig_float_view, this);
         mLogPanelLayout = (RelativeLayout)findViewById(R.id.pig_float_panel);
-        mDragView = (TextView) findViewById(R.id.tv_float_drag);
+        mDragView = (ImageView) findViewById(R.id.tv_float_drag);
         mDisplayTextView = (TextView)findViewById(R.id.tv_float_display);
-        mCloseButton = (Button) findViewById(R.id.btn_float_close);
+        mCloseButton = (ImageView) findViewById(R.id.btn_float_close);
         mDragView.setOnClickListener(this);
         mCloseButton.setOnClickListener(this);
 
