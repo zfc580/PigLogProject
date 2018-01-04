@@ -1,5 +1,6 @@
 package com.meitu.piglogproject.app.main.activity.main.activity;
 
+import com.meitu.piglog.common.Pig;
 import com.meitu.piglogproject.R;
 import com.meitu.piglogproject.app.main.activity.main.mvp.MainPresenter;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
@@ -56,7 +57,8 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
         mShowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mPresenter.initPig(MainActivity.this);
+                Pig.D("Pig", "分辨率：1280*720");
+                Pig.D("Pig", "码率：5990400.0");
             }
         });
         mHidenBtn.setOnClickListener(new View.OnClickListener() {

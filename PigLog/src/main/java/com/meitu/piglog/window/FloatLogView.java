@@ -62,7 +62,6 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     // Override Methods
     // ===========================================================
 
-
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_float_close){
@@ -131,6 +130,12 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
 
     public void setPigWindowManager(WindowManager wm){
         mWindowManager = wm;
+    }
+
+    public void displayLogs(String log){
+        String displayMsg = mDisplayTextView.getText().toString().trim();
+        displayMsg = displayMsg + "\n" + log;
+        mDisplayTextView.setText(displayMsg);
     }
 
     // ===========================================================

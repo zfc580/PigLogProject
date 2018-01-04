@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:background="#FFC0CB">
 
     <RelativeLayout
         android:id="@+id/pig_float_panel"
+        tools:visibility="visible"
         android:visibility="gone"
-        android:layout_width="200dip"
-        android:layout_height="200dip">
+        android:layout_width="250dip"
+        android:layout_height="300dip">
         <Button
             android:id="@+id/btn_float_close"
             android:layout_width="wrap_content"
@@ -18,9 +20,12 @@
             android:text="关闭"/>
         <TextView
             android:id="@+id/tv_float_display"
+            android:layout_below="@+id/btn_float_close"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="test test test"/>
+            android:text=""/>
     </RelativeLayout>
     <TextView
         android:id="@+id/tv_float_drag"

@@ -25,7 +25,7 @@ public class PigWindow {
     // ===========================================================
     private Context mContext;
     private WindowManager mWindowManager;
-    private WindowManager.LayoutParams floatParams;
+    private WindowManager.LayoutParams mFloatParams;
     private FloatLogView mFloatView;
 
     // ===========================================================
@@ -37,7 +37,6 @@ public class PigWindow {
         mFloatView = new FloatLogView(mContext);
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         mFloatView.setPigWindowManager(mWindowManager);
-
     }
 
     // ===========================================================
@@ -45,25 +44,25 @@ public class PigWindow {
     // ===========================================================
     public void addFloatWindow(){
 
-
         int screenWidth = mWindowManager.getDefaultDisplay().getWidth();
         int screenHeight = mWindowManager.getDefaultDisplay().getHeight();
         if (mFloatView != null) {
 
-            if (floatParams == null) {
-                floatParams = new WindowManager.LayoutParams();
-                floatParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-                floatParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+            if (mFloatParams == null) {
+                mFloatParams = new WindowManager.LayoutParams();
+                mFloatParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                mFloatParams.format = PixelFormat.RGBA_8888;
+                mFloatParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-                floatParams.gravity = Gravity.START | Gravity.TOP;
-                floatParams.width = WindowManager.LayoutParams.WRAP_CONTENT;;
-                floatParams.height = WindowManager.LayoutParams.WRAP_CONTENT;;
-                floatParams.x = screenWidth / 2;
-                floatParams.y = screenHeight / 2;
-                mFloatView.setPigWindowParams(floatParams);
+                mFloatParams.gravity = Gravity.START | Gravity.TOP;
+                mFloatParams.width = WindowManager.LayoutParams.WRAP_CONTENT;;
+                mFloatParams.height = WindowManager.LayoutParams.WRAP_CONTENT;;
+                mFloatParams.x = screenWidth / 2;
+                mFloatParams.y = screenHeight / 2;
+                mFloatView.setPigWindowParams(mFloatParams);
             }
             try {
-                mWindowManager.addView(mFloatView, floatParams);
+                mWindowManager.addView(mFloatView, mFloatParams);
             }catch (IllegalStateException e){
                 Toast.makeText(mContext, "不可重复添加悬浮框",Toast.LENGTH_LONG).show();
             }
@@ -77,15 +76,13 @@ public class PigWindow {
         }
     }
 
-    public void printLog(String msg){
-
-    }
-
 
     // ===========================================================
     // Define Methods
     // ===========================================================
-
+    public void printFLoatLog(String msg){
+        mFloatView.displayLogs(msg);
+    }
 
     // ===========================================================
     // Inner and Anonymous Classes

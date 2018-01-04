@@ -70,6 +70,7 @@ public class Pig {
 
     private void destroy(){
         if(mApplication != null){
+            releasePig();
             mApplication.unregisterActivityLifecycleCallbacks(mLifecycleCallback);
         }
     }
@@ -98,6 +99,16 @@ public class Pig {
             }
         }
         return false;
+    }
+
+    public void printLog(String msg){
+        mPigWindow.printFLoatLog(msg);
+    }
+
+    public static void D(String tag, String msg){
+        StringBuilder sb = new StringBuilder(tag);
+        sb.append(":").append(msg);
+        mInstance.printLog(sb.toString());
     }
 
     // ===========================================================
