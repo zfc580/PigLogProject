@@ -36,9 +36,7 @@ public class MainPresenter extends MainContract.Presenter {
 
     @Override
     public void initPig(Context context) {
-        super.initPig(context);
         Pig.createInstance(context);
-        Pig.shareInstance().initPig();
 
     }
 

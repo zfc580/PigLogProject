@@ -19,9 +19,7 @@ public class MainContract {
     }
 
     public static abstract class Presenter extends AbstractPresenter<View, Model>{
-        public void initPig(Context context){
-
-        }
+        public abstract void initPig(Context context);
     }
 
     public interface Model extends IModel {

@@ -54,18 +54,15 @@ public class Pig {
     public static void createInstance(Context context){
         if(mInstance == null){
             mInstance = new Pig(context);
+            mInstance.initPig();
         }
     }
 
-    public static void destroyInstance(){
+    private static void destroyInstance(){
         if(mInstance != null){
             mInstance.destroy();
             mInstance = null;
         }
-    }
-
-    public static Pig shareInstance(){
-        return mInstance;
     }
 
     private void destroy(){
@@ -80,7 +77,7 @@ public class Pig {
         mPigWindow.addFloatWindow();
     }
 
-    public void releasePig(){
+    private void releasePig(){
         mPigWindow.removeFloatWindow();
         mPigWindow = null;
     }
