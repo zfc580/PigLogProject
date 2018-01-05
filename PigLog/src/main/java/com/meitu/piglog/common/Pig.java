@@ -85,7 +85,11 @@ public class Pig {
         mPigWindow = null;
     }
 
-    private boolean isAppExit(){
+    /**
+     * 判断当前的Activity是否是主Activty，从主Activty退出就是整个应用退出了
+     * @return 是否是主Activity
+     */
+    private boolean isLauncherActivity(){
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         List<ResolveInfo> packageInfos = mContext.getPackageManager().queryIntentActivities(intent, 0);
@@ -152,7 +156,7 @@ public class Pig {
         @Override
         public void onActivityDestroyed(Activity activity) {
             Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityDestroyed activity = "+activity.getComponentName());
-            if(isAppExit()){
+            if(isLauncherActivity()){
                 destroyInstance();
             }
         }

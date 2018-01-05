@@ -36,12 +36,13 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                mPresenter.initPig(MainActivity.this);
-            }
-        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.initPig(MainActivity.this);
     }
 
     @Override
