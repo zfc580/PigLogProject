@@ -1,4 +1,4 @@
-package com.meitu.piglogproject.app.main.activity.main.mvp;
+package com.meitu.piglogproject.app.main.mvp;
 
 /**
  * MainModel

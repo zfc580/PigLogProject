@@ -1,13 +1,12 @@
-package com.meitu.piglogproject.app.main.activity.main.activity;
+package com.meitu.piglogproject.app.main.activity;
 
 import com.meitu.piglog.common.Pig;
 import com.meitu.piglogproject.R;
-import com.meitu.piglogproject.app.main.activity.main.mvp.MainPresenter;
+import com.meitu.piglogproject.app.main.mvp.MainPresenter;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
-import com.meitu.piglogproject.app.main.activity.main.mvp.MainContract;
+import com.meitu.piglogproject.app.main.mvp.MainContract;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
