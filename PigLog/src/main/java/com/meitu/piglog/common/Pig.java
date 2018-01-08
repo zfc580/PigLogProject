@@ -1,6 +1,7 @@
 package com.meitu.piglog.common;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -81,19 +82,23 @@ public class Pig {
     }
 
     /**
-     * 判断当前的Activity是否是主Activty，从主Activty退出就是整个应用退出了
-     * @return 是否是主Activity
+     * APP是否处于前台唤醒状态
+     *
+     * @return true 前台, false 后台
      */
-    private boolean isLauncherActivity(){
-        Intent intent = new Intent(Intent.ACTION_MAIN, null);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> packageInfos = mContext.getPackageManager().queryIntentActivities(intent, 0);
-        for (int i = packageInfos.size()-1; i >= 0; i--) {
-            String launcherActivityName = packageInfos.get(i).activityInfo.name;
-            String packageName = packageInfos.get(i).activityInfo.packageName;
-            Log.i("appappinfo", i + " -- launcherActivityName: " + launcherActivityName);
-            Log.i("appappinfo", i + " -- packageName: " + packageName);
-            if(packageName.equals(mContext.getPackageName())){
+    public boolean isAppOnForeground() {
+        ActivityManager activityManager = (ActivityManager) mContext.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = mContext.getApplicationContext().getPackageName();
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager
+                .getRunningAppProcesses();
+        if (appProcesses == null)
+            return false;
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            // The name of the process that this object is associated with.
+            Log.i("appappinfo", " processName: " + appProcess.processName+", importance = "+appProcess.importance);
+            if (appProcess.processName.equals(packageName)
+                    && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
                 return true;
             }
         }
@@ -118,51 +123,55 @@ public class Pig {
 
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityCreated activity = "+activity.getComponentName());
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityCreated activity = "
+                    + activity.getComponentName().getShortClassName());
 
         }
 
         @Override
         public void onActivityStarted(Activity activity) {
-            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStarted activity = "+activity.getComponentName());
+            boolean isForeground = isAppOnForeground();
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStarted activity = "
+                    + activity.getComponentName().getShortClassName() + ", isForeground = " + isForeground);
+
+            if(mPigWindow != null){
+                mPigWindow.addFloatWindow();
+            }
         }
 
         @Override
         public void onActivityResumed(Activity activity) {
-            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityResumed activity = "+activity.getComponentName());
-            if(isLauncherActivity()){
-                if(mPigWindow != null){
-                    mPigWindow.addFloatWindow();
-                }
-            }
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityResumed activity = "
+                    + activity.getComponentName().getShortClassName());
         }
 
         @Override
         public void onActivityPaused(Activity activity) {
-            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityPaused activity = "+activity.getComponentName());
-            if(isLauncherActivity()){
-                if(mPigWindow != null){
-                    mPigWindow.removeFloatWindow();
-                }
-            }
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityPaused activity = "
+                    + activity.getComponentName().getShortClassName());
         }
 
         @Override
         public void onActivityStopped(Activity activity) {
-            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStopped activity = "+activity.getComponentName());
+            boolean isForeground = isAppOnForeground();
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStopped activity = "
+                    + activity.getComponentName().getShortClassName() + ", isForeground = " + isForeground);
+            if(mPigWindow != null && !isForeground){
+                mPigWindow.removeFloatWindow();
+            }
         }
 
         @Override
         public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivitySaveInstanceState activity = "+activity.getComponentName());
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivitySaveInstanceState activity = "
+                    + activity.getComponentName().getShortClassName());
         }
 
         @Override
         public void onActivityDestroyed(Activity activity) {
-            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityDestroyed activity = "+activity.getComponentName());
-            if(isLauncherActivity()){
-                destroyInstance();
-            }
+            Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityDestroyed activity = "
+                    + activity.getComponentName().getShortClassName());
+
         }
     }
 

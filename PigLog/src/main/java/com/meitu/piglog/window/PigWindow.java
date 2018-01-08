@@ -8,6 +8,7 @@ import android.os.Binder;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.WindowManager;
 
@@ -87,8 +88,10 @@ public class PigWindow {
                 mFloatView.setPigWindowParams(mFloatParams);
             }
             try {
+                Log.i("zhoufucai", "PigWindow addView. ");
                 mWindowManager.addView(mFloatView, mFloatParams);
             }catch (IllegalStateException e){
+                Log.i("zhoufucai", "PigWindow addView error. ");
                 e.printStackTrace();
             }
         }
@@ -97,8 +100,10 @@ public class PigWindow {
     public void removeFloatWindow(){
         if(mWindowManager != null){
             try {
+                Log.i("zhoufucai", "PigWindow removeView. ");
                 mWindowManager.removeView(mFloatView);
             }catch (IllegalArgumentException e){
+                Log.i("zhoufucai", "PigWindow removeView error. ");
                 e.printStackTrace();
             }
         }
