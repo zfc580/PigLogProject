@@ -10,7 +10,6 @@ import android.provider.Settings;
 import android.support.annotation.RequiresApi;
 import android.view.Gravity;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import java.lang.reflect.Method;
 
@@ -90,7 +89,7 @@ public class PigWindow {
             try {
                 mWindowManager.addView(mFloatView, mFloatParams);
             }catch (IllegalStateException e){
-                Toast.makeText(mContext, "不可重复添加悬浮框",Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
         }
     }
@@ -100,7 +99,7 @@ public class PigWindow {
             try {
                 mWindowManager.removeView(mFloatView);
             }catch (IllegalArgumentException e){
-                Toast.makeText(mContext, "不可重复移除悬浮框",Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
         }
     }
@@ -119,6 +118,11 @@ public class PigWindow {
         }
     }
 
+    /**
+     * 判断应用是否具备悬浮窗权限
+     *
+     * @return true 具备权限，false 反之
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private boolean checkOps() {
         try {
@@ -136,7 +140,7 @@ public class PigWindow {
                 return false;
             }
             Object[] arrayOfObject1 = new Object[3];
-            arrayOfObject1[0] = 24;
+            arrayOfObject1[0] = 24; //24为悬浮窗权限
             arrayOfObject1[1] = Binder.getCallingUid();
             arrayOfObject1[2] = mContext.getPackageName();
             int m = (Integer) method.invoke(object, arrayOfObject1);

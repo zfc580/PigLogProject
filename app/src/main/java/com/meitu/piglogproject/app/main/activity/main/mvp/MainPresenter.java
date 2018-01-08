@@ -37,7 +37,6 @@ public class MainPresenter extends MainContract.Presenter {
     @Override
     public void initPig(Context context) {
         Pig.createInstance(context);
-
     }
 
     // ===========================================================

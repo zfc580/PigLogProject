@@ -74,11 +74,9 @@ public class Pig {
 
     public void initPig(){
         mPigWindow = new PigWindow(mContext);
-        mPigWindow.addFloatWindow();
     }
 
     private void releasePig(){
-        mPigWindow.removeFloatWindow();
         mPigWindow = null;
     }
 
@@ -131,13 +129,21 @@ public class Pig {
         @Override
         public void onActivityResumed(Activity activity) {
             Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityResumed activity = "+activity.getComponentName());
-            mPigWindow.addFloatWindow();
+            if(isLauncherActivity()){
+                if(mPigWindow != null){
+                    mPigWindow.addFloatWindow();
+                }
+            }
         }
 
         @Override
         public void onActivityPaused(Activity activity) {
             Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityPaused activity = "+activity.getComponentName());
-            mPigWindow.removeFloatWindow();
+            if(isLauncherActivity()){
+                if(mPigWindow != null){
+                    mPigWindow.removeFloatWindow();
+                }
+            }
         }
 
         @Override
