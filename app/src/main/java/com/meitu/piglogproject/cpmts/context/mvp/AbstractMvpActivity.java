@@ -29,8 +29,8 @@ public abstract class AbstractMvpActivity<P extends IPresenter> extends Fragment
         super.onCreate(savedInstanceState);
         initViews(savedInstanceState);
         mPresenter = onLoadPresenter(savedInstanceState);
-        mPresenter.attachView(this);
         if (mPresenter != null) {
+            mPresenter.attachView(this);
             mPresenter.subscribe();
         }
         initEventAndData();

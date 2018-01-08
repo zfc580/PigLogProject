@@ -119,6 +119,7 @@ public class Pig {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
             Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityCreated activity = "+activity.getComponentName());
+
         }
 
         @Override
