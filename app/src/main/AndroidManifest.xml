@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.meitu.piglogproject">
-  <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
   <application
       android:name=".app.PigApplication"
@@ -16,6 +15,12 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="com.meitu.piglogproject.app.second.activity.SecondActivity" android:configChanges="orientation|screenSize" android:screenOrientation="portrait" /></application>
+    <activity
+        android:name="com.meitu.piglogproject.app.second.activity.SecondActivity"
+        android:configChanges="orientation|screenSize"
+        android:screenOrientation="portrait" />
+    <service android:name="com.meitu.piglog.common.PigService"/>
+  </application>
+
 </manifest>
 
