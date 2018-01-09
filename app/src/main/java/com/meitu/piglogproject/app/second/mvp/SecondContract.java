@@ -1,4 +1,4 @@
-package com.meitu.piglogproject.app.main.mvp;
+package com.meitu.piglogproject.app.second.mvp;
 
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractPresenter;
 import com.meitu.piglogproject.cpmts.context.mvp.IModel;

@@ -2,21 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.meitu.piglogproject">
   <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-  <application
-      android:name=".app.main.application.PigApplication"
-      android:allowBackup="true"
-      android:icon="@mipmap/ic_launcher"
-      android:label="@string/app_name"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:supportsRtl="true"
-      android:theme="@style/AppTheme">
+  <application android:name=".app.main.application.PigApplication" android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/AppTheme">
     <activity android:name=".app.main.activity.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="com.meitu.piglogproject.app.main.activity.SecondActivity" android:configChanges="orientation|screenSize" android:screenOrientation="portrait" />
+    <activity android:name="com.meitu.piglogproject.app.second.activity.SecondActivity" android:configChanges="orientation|screenSize" android:screenOrientation="portrait" />
+    <activity android:name="com.meitu.piglogproject.app.main.third.activity.ThirdActivity" android:configChanges="orientation|screenSize" android:screenOrientation="portrait" />
   </application>
 </manifest>
 

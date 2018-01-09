@@ -1,8 +1,8 @@
-package com.meitu.piglogproject.app.main.activity;
+package com.meitu.piglogproject.app.second.activity;
 
 import com.meitu.piglogproject.R;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
-import com.meitu.piglogproject.app.main.mvp.SecondContract;
+import com.meitu.piglogproject.app.second.mvp.SecondContract;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
