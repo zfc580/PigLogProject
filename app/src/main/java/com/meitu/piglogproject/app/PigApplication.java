@@ -1,4 +1,4 @@
-package com.meitu.piglogproject.app.main.application;
+package com.meitu.piglogproject.app;
 
 import android.app.Application;
 

@@ -3,6 +3,7 @@ package com.meitu.piglogproject.app.main.activity;
 import com.meitu.piglog.common.Pig;
 import com.meitu.piglogproject.R;
 import com.meitu.piglogproject.app.main.mvp.MainPresenter;
+import com.meitu.piglogproject.app.second.activity.SecondActivity;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
 import com.meitu.piglogproject.app.main.mvp.MainContract;
 

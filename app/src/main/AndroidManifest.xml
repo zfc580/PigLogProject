@@ -3,7 +3,7 @@
   <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
   <application
-      android:name=".app.main.application.PigApplication"
+      android:name=".app.PigApplication"
       android:allowBackup="true"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
@@ -16,7 +16,6 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name="com.meitu.piglogproject.app.main.activity.SecondActivity" android:configChanges="orientation|screenSize" android:screenOrientation="portrait" />
-  </application>
+    <activity android:name="com.meitu.piglogproject.app.second.activity.SecondActivity" android:configChanges="orientation|screenSize" android:screenOrientation="portrait" /></application>
 </manifest>
 
