@@ -1,11 +1,11 @@
 package com.meitu.piglog.window;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,16 +31,13 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     // ===========================================================
     //private RelativeLayout mLogPanelLayout;
     private TextView mDisplayTextView;
-    private ImageView mCloseButton;
     private ImageView mDragView;
-
-    private float xInScreen;
-    private float yInScreen;
-    private float xDownInScreen;
-    private float yDownInScreen;
-    private float xInView;
-    private float yInView;
-    private int statusBarHeight;
+    private float mXInScreen;
+    private float mYInScreen;
+    private float mXInView;
+    private float mYInView;
+    private int mStatusBarHeight;
+    private int mWindowWidth;
     private WindowManager.LayoutParams mParams;
     private WindowManager mWindowManager;
 
@@ -77,23 +74,26 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
+        Rect appRect = new Rect();
+        getWindowVisibleDisplayFrame(appRect);
+        mStatusBarHeight = appRect.top;
+        mWindowWidth = appRect.right;
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                xInView = event.getX();
-                yInView = event.getY();
-                xDownInScreen = event.getRawX();
-                yDownInScreen = event.getRawY() - getStatusBarHeight();
-                xInScreen = event.getRawX();
-                yInScreen = event.getRawY() - getStatusBarHeight();
+                mXInView = event.getX();
+                mYInView = event.getY();
+                mXInScreen = event.getRawX();
+                mYInScreen = event.getRawY() - mStatusBarHeight;
 
                 break;
             case MotionEvent.ACTION_MOVE:
-                xInScreen = event.getRawX();
-                yInScreen = event.getRawY() - getStatusBarHeight();
-                updateViewPosition();
+                mXInScreen = event.getRawX();
+                mYInScreen = event.getRawY() - mStatusBarHeight;
+                updateViewPosition(false);
                 break;
 
             case MotionEvent.ACTION_UP:
+                updateViewPosition(true);
                 break;
 
         }
@@ -103,24 +103,19 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     // ===========================================================
     // Define Methods
     // ===========================================================
-    private int getStatusBarHeight() {
-        if (statusBarHeight == 0) {
-            try {
-                Class<?> c = Class.forName("com.android.internal.R$dimen");
-                Object o = c.newInstance();
-                Field field = c.getField("status_bar_height");
-                int x = (Integer) field.get(o);
-                statusBarHeight = getResources().getDimensionPixelSize(x);
-            } catch (Exception e) {
-                e.printStackTrace();
+
+    private void updateViewPosition(boolean isUp) {
+        int targetX = (int) (mXInScreen - mXInView);
+        int targetY = (int) (mYInScreen - mYInView);
+        if(isUp){
+            if(targetX <= mWindowWidth/2){
+                targetX = 0;
+            } else {
+                targetX = (int) (mWindowWidth - mXInView);
             }
         }
-        return statusBarHeight;
-    }
-
-    private void updateViewPosition() {
-        mParams.x = (int) (xInScreen - xInView);
-        mParams.y = (int) (yInScreen - yInView);
+        mParams.x = targetX;
+        mParams.y = targetY;
         mWindowManager.updateViewLayout(this, mParams);
     }
 
