@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * PigWindow.java
@@ -35,6 +38,7 @@ public class PigWindow {
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mFloatParams;
     private FloatLogView mFloatView;
+    private List<String> mLogList = new LinkedList<>();
 
     // ===========================================================
     // Constructor
@@ -107,7 +111,22 @@ public class PigWindow {
     }
 
     public void printFLoatLog(String msg){
-        mFloatView.displayLogs(msg);
+        msg += "\n";
+        if(mLogList.size() > 10){
+            mLogList.remove(0);
+            mLogList.add(msg);
+        } else {
+            mLogList.add(msg);
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for(String log: mLogList){
+            stringBuilder.append(log);
+        }
+        String targetLogStr = stringBuilder.toString();
+        if(targetLogStr.charAt(targetLogStr.length() - 1) == '\n'){
+            targetLogStr = targetLogStr.substring(0, targetLogStr.length() - 1);
+        }
+        mFloatView.displayLogs(targetLogStr);
     }
 
     // ===========================================================

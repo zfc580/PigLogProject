@@ -128,9 +128,27 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     }
 
     public void displayLogs(String log){
-        String displayMsg = mDisplayTextView.getText().toString().trim();
-        displayMsg = displayMsg + "\n" + log;
-        mDisplayTextView.setText(displayMsg);
+
+        mDisplayTextView.setText(log);
+    }
+
+    /**
+     * 判断str1中包含str2的个数
+     * @param str1
+     * @param str2
+     * @return counter
+     */
+    public static int countStr(String str1, String str2) {
+        int counter = 0;
+        if (str1.indexOf(str2) == -1) {
+            return 0;
+        } else if (str1.indexOf(str2) != -1) {
+            counter++;
+            countStr(str1.substring(str1.indexOf(str2) +
+                    str2.length()), str2);
+            return counter;
+        }
+        return 0;
     }
 
     // ===========================================================

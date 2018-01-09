@@ -1,10 +1,13 @@
 package com.meitu.piglogproject.app.second.activity;
 
+import com.meitu.piglog.common.Pig;
 import com.meitu.piglogproject.R;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
 import com.meitu.piglogproject.app.second.mvp.SecondContract;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 
 /**
@@ -21,7 +24,7 @@ public class SecondActivity extends AbstractMvpActivity<SecondContract.Presenter
     // ===========================================================
     // Fields
     // ===========================================================
-    private Button mPrintButton;
+    private Button mLogButton1, mLogButton2;
 
     // ===========================================================
     // Override Methods
@@ -35,6 +38,20 @@ public class SecondActivity extends AbstractMvpActivity<SecondContract.Presenter
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.second_activity);
+        mLogButton1 = (Button) findViewById(R.id.btn_pig_log1);
+        mLogButton2 = (Button)findViewById(R.id.btn_pig_log2);
+        mLogButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pig.D("Pig", "码率：5990400.0");
+            }
+        });
+        mLogButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pig.D("Pig", "拍摄时长：0");
+            }
+        });
     }
 
     @Override
