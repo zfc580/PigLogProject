@@ -29,7 +29,6 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     // Fields
     // ===========================================================
     private Button mShowBtn, mHidenBtn;
-    private Handler mHandler = new Handler();
 
     // ===========================================================
     // Override Methods
@@ -40,13 +39,13 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("zhoufucai", "MainActivity onCreate. ");
+        Pig.init(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         Log.i("zhoufucai", "MainActivity onStart. ");
-        mPresenter.initPig(MainActivity.this);
     }
 
     @Override
@@ -71,6 +70,7 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     protected void onDestroy() {
         super.onDestroy();
         Log.i("zhoufucai", "MainActivity onDestroy. ");
+        Pig.unInit();
     }
 
     @Override

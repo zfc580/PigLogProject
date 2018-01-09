@@ -59,7 +59,7 @@ public class Pig {
         }
     }
 
-    private static void destroyInstance(){
+    public static void unInit(){
         if(mInstance != null){
             mInstance.destroy();
             mInstance = null;
@@ -67,7 +67,7 @@ public class Pig {
     }
 
     private void destroy(){
-
+        mContext.unbindService(mServiceConnection);
     }
 
 

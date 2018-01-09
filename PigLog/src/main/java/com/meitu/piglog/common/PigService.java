@@ -14,8 +14,6 @@ import android.util.Log;
 
 import com.meitu.piglog.window.PigWindow;
 
-import java.util.List;
-
 /**
  * PigService.java
  * Useage: PigService
@@ -67,6 +65,7 @@ public class PigService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mPigWindow.removeFloatWindow();
         Log.i("zhoufucai", "PigService onDestroy. ");
         mApplication.unregisterActivityLifecycleCallbacks(mLifecycleCallback);
         mApplication.unregisterComponentCallbacks(mComponentCallback);

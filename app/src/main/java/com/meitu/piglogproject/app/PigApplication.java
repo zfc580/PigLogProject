@@ -1,9 +1,6 @@
 package com.meitu.piglogproject.app;
 
 import android.app.Application;
-import android.content.Context;
-
-import com.meitu.piglog.common.Pig;
 
 /**
  * PigApplication.java
@@ -12,15 +9,10 @@ import com.meitu.piglog.common.Pig;
  */
 public class PigApplication extends Application {
 
-    private static Context mContext;
     @Override
     public void onCreate() {
         super.onCreate();
-        mContext = getApplicationContext();
-        Pig.init(this);
+
     }
 
-    public static Context getPigApplication(){
-        return mContext;
-    }
 }
