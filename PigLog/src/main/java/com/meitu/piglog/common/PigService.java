@@ -33,6 +33,7 @@ public class PigService extends Service {
     private PigWindow mPigWindow;
     private PigActivityLifecycleCallbacks mLifecycleCallback;
     private PigComponentCallback mComponentCallback;
+    private boolean hadAddWindow = false;
 
     // ===========================================================
     // Constructor
@@ -115,13 +116,19 @@ public class PigService extends Service {
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
             Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityCreated activity = "
                     + activity.getComponentName().getShortClassName());
-
         }
 
         @Override
         public void onActivityStarted(Activity activity) {
             Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStarted activity = "
                     + activity.getComponentName().getShortClassName());
+            if(mPigWindow != null && !hadAddWindow){
+                /**
+                 *  申请权限后，从设置页面返回可以接着显示悬浮窗；
+                 */
+                mPigWindow.addFloatWindow();
+                hadAddWindow = true;
+            }
             if(mPigWindow != null){
                 mPigWindow.setVisivity(true);
             }

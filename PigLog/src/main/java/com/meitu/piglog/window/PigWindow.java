@@ -39,6 +39,7 @@ public class PigWindow {
     private WindowManager.LayoutParams mFloatParams;
     private FloatLogView mFloatView;
     private List<String> mLogList = new LinkedList<>();
+    private boolean mHadPermitted = false;
 
     // ===========================================================
     // Constructor
@@ -60,11 +61,12 @@ public class PigWindow {
     // Define Methods
     // ===========================================================
     public void addFloatWindow(){
-
-        int screenWidth = mWindowManager.getDefaultDisplay().getWidth();
-        int screenHeight = mWindowManager.getDefaultDisplay().getHeight();
+        if(!isHaveFloatWindowPermission()){
+            return;
+        }
         if (mFloatView != null) {
-
+            int screenWidth = mWindowManager.getDefaultDisplay().getWidth();
+            int screenHeight = mWindowManager.getDefaultDisplay().getHeight();
             if (mFloatParams == null) {
                 mFloatParams = new WindowManager.LayoutParams();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
@@ -89,6 +91,20 @@ public class PigWindow {
                 Log.i("zhoufucai", "PigWindow addView error. ");
                 e.printStackTrace();
             }
+        }
+    }
+
+    private boolean isHaveFloatWindowPermission(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            boolean canDraw = Settings.canDrawOverlays(mContext);
+            if(!canDraw && !mHadPermitted){
+                mHadPermitted = true;
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                mContext.startActivity(intent);
+            }
+            return canDraw;
+        } else {
+            return true;
         }
     }
 
