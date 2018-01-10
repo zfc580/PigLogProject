@@ -1,20 +1,10 @@
 package com.meitu.piglog.common;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.ResolveInfo;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.util.Log;
-
-import com.meitu.piglog.window.PigWindow;
-
-import java.util.List;
 
 /**
  * Pig.java
