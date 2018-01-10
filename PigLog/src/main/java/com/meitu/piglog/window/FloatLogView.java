@@ -47,10 +47,8 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     public FloatLogView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.pig_float_view, this);
-//       mLogPanelLayout = (RelativeLayout)findViewById(R.id.pig_float_panel);
         mDragView = (ImageView) findViewById(R.id.tv_float_drag);
         mDisplayTextView = (TextView)findViewById(R.id.tv_float_display);
-//        mCloseButton = (ImageView) findViewById(R.id.btn_float_close);
         mDragView.setOnClickListener(this);
         mDisplayTextView.setOnClickListener(this);
 
@@ -130,25 +128,6 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     public void displayLogs(String log){
 
         mDisplayTextView.setText(log);
-    }
-
-    /**
-     * 判断str1中包含str2的个数
-     * @param str1
-     * @param str2
-     * @return counter
-     */
-    public static int countStr(String str1, String str2) {
-        int counter = 0;
-        if (str1.indexOf(str2) == -1) {
-            return 0;
-        } else if (str1.indexOf(str2) != -1) {
-            counter++;
-            countStr(str1.substring(str1.indexOf(str2) +
-                    str2.length()), str2);
-            return counter;
-        }
-        return 0;
     }
 
     // ===========================================================
