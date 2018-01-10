@@ -14,6 +14,7 @@
         android:src="@mipmap/log_float_drag_icon" />
     <TextView
         android:id="@+id/tv_float_display"
+        android:visibility="gone"
         android:layout_marginLeft="3dp"
         android:layout_toRightOf="@+id/tv_float_drag"
         android:layout_centerVertical="true"
