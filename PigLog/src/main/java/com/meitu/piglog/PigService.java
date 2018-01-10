@@ -24,17 +24,17 @@ public class PigService extends Service {
     // Fields
     // ===========================================================
     private PigWindow mPigWindow;
-    private boolean hadAddWindow = false;
+    private boolean mHadAddWindow = false;
     private SimpleLifecycleCallback mActivityCallback = new SimpleLifecycleCallback(){
         @Override
         public void onActivityStarted(Activity activity) {
             super.onActivityStarted(activity);
-            if(mPigWindow != null && !hadAddWindow){
+            if(mPigWindow != null && !mHadAddWindow){
                 /**
                  *  申请权限后，从设置页面返回可以接着显示悬浮窗；
                  */
                 mPigWindow.addFloatWindow();
-                hadAddWindow = true;
+                mHadAddWindow = true;
             }
             if(mPigWindow != null){
                 mPigWindow.setVisivity(true);

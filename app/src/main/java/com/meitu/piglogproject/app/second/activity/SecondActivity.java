@@ -21,11 +21,6 @@ public class SecondActivity extends AbstractMvpActivity<SecondContract.Presenter
     // ===========================================================
 
     // ===========================================================
-    // Fields
-    // ===========================================================
-    private Button mLogButton1, mLogButton2;
-
-    // ===========================================================
     // Override Methods
     // ===========================================================
 
@@ -37,8 +32,8 @@ public class SecondActivity extends AbstractMvpActivity<SecondContract.Presenter
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.second_activity);
-        mLogButton1 = (Button) findViewById(R.id.btn_pig_log1);
-        mLogButton2 = (Button)findViewById(R.id.btn_pig_log2);
+        Button mLogButton1 = (Button) findViewById(R.id.btn_pig_log1);
+        Button mLogButton2 = (Button) findViewById(R.id.btn_pig_log2);
         mLogButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -25,11 +25,6 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     // ===========================================================
 
     // ===========================================================
-    // Fields
-    // ===========================================================
-    private Button mShowBtn, mHidenBtn;
-
-    // ===========================================================
     // Override Methods
     // ===========================================================RP
 
@@ -80,8 +75,8 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.main_activity);
-        mShowBtn = (Button) findViewById(R.id.btn_pig_show);
-        mHidenBtn = (Button)findViewById(R.id.btn_pig_hide);
+        Button mShowBtn = (Button) findViewById(R.id.btn_pig_show);
+        Button mHidenBtn = (Button) findViewById(R.id.btn_pig_hide);
         mShowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

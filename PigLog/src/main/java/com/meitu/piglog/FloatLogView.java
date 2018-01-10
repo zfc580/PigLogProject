@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,14 +24,12 @@ public class FloatLogView extends RelativeLayout {
     // Fields
     // ===========================================================
     private TextView mDisplayTextView;
-    private ImageView mDragView;
     private float mXInScreen;
     private float mYInScreen;
     private float mXInView;
     private float mYInView;
     private float mStartX;
     private float mStartY;
-    private int mStatusBarHeight;
     private int mWindowWidth;
     private WindowManager.LayoutParams mParams;
     private WindowManager mWindowManager;
@@ -43,7 +40,6 @@ public class FloatLogView extends RelativeLayout {
     FloatLogView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.pig_float_view, this);
-        mDragView = (ImageView) findViewById(R.id.tv_float_drag);
         mDisplayTextView = (TextView)findViewById(R.id.tv_float_display);
     }
 
@@ -54,7 +50,7 @@ public class FloatLogView extends RelativeLayout {
     public boolean dispatchTouchEvent(MotionEvent event) {
         Rect appRect = new Rect();
         getWindowVisibleDisplayFrame(appRect);
-        mStatusBarHeight = appRect.top;
+        int mStatusBarHeight = appRect.top;
         mWindowWidth = appRect.right;
         mXInScreen = event.getRawX();
         mYInScreen = event.getRawY() - mStatusBarHeight;

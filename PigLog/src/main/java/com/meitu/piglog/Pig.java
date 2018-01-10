@@ -22,7 +22,7 @@ public class Pig {
     // ===========================================================
     // Fields
     // ===========================================================
-    private static int mLineNum = 10;
+    private int mLineNum = 10;
     private static Pig mInstance;
     private Context mContext;
     private PigService mService;
@@ -75,12 +75,12 @@ public class Pig {
         mInstance.printLog(tag);
     }
 
-    protected static int getLineNum() {
-        return mLineNum;
+    static int getLineNum() {
+        return mInstance.mLineNum;
     }
 
     public static void setLineNum(int num){
-        mLineNum = num;
+        mInstance.mLineNum = num;
     }
 
     // ===========================================================

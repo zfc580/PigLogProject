@@ -19,7 +19,7 @@ import java.util.List;
  * Useage: PigWindow
  * Created by zfc<zfc@meitu.com> on 2018/1/3 - 11:04
  */
-public class PigWindow {
+class PigWindow {
 
 
     // ===========================================================
@@ -41,7 +41,7 @@ public class PigWindow {
     // Constructor
     // ===========================================================
 
-    public PigWindow(Context context){
+    PigWindow(Context context){
         mContext = context;
         mFloatView = new FloatLogView(mContext);
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
@@ -56,7 +56,7 @@ public class PigWindow {
     // ===========================================================
     // Define Methods
     // ===========================================================
-    public void addFloatWindow(){
+    void addFloatWindow(){
 
         if (mFloatView != null) {
             if (mFloatParams == null) {
@@ -87,7 +87,7 @@ public class PigWindow {
         }
     }
 
-    @TargetApi(23)
+    @TargetApi(Build.VERSION_CODES.M)
     private boolean isHaveFloatWindowPermission(){
         boolean canDraw = Settings.canDrawOverlays(mContext);
         if(!canDraw && !mHadPermitted){
@@ -98,7 +98,7 @@ public class PigWindow {
         return canDraw;
     }
 
-    public void removeFloatWindow(){
+    void removeFloatWindow(){
         if(mWindowManager != null){
             try {
                 Log.i("zhoufucai", "PigWindow removeView. ");
@@ -110,13 +110,13 @@ public class PigWindow {
         }
     }
 
-    public void setVisivity(boolean visivity){
+    void setVisivity(boolean visivity){
         if(mFloatView != null){
             mFloatView.setVisibility(visivity ? View.VISIBLE : View.GONE);
         }
     }
 
-    public void printFLoatLog(String msg){
+    void printFLoatLog(String msg){
         msg += "\n";
         if(mLogList.size() > Pig.getLineNum()){
             mLogList.remove(0);
