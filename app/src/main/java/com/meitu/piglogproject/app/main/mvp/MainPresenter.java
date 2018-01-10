@@ -2,8 +2,6 @@ package com.meitu.piglogproject.app.main.mvp;
 
 import android.content.Context;
 
-import com.meitu.piglog.common.Pig;
-
 /**
  * MainPresenter
  *

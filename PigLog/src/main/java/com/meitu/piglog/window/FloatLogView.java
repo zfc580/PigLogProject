@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.meitu.piglog.R;
 
-import java.lang.reflect.Field;
-
 /**
  * FloatLogView.java
  * Useage: FloatLogView
