@@ -114,8 +114,13 @@ public class FloatLogView extends RelativeLayout {
         mWindowManager = wm;
     }
 
-    protected void displayLogs(String log){
-        mDisplayTextView.setText(log);
+    protected void displayLogs(final String log){
+        mDisplayTextView.post(new Runnable() {
+            @Override
+            public void run() {
+                mDisplayTextView.setText(log);
+            }
+        });
     }
 
     // ===========================================================
