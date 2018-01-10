@@ -64,6 +64,11 @@ public class PigService extends Service {
     }
 
     @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mPigWindow.removeFloatWindow();
