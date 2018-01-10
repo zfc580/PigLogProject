@@ -1,4 +1,4 @@
-package com.meitu.piglog.window;
+package com.meitu.piglog;
 
 import android.content.Context;
 import android.content.Intent;
@@ -119,7 +119,7 @@ public class PigWindow {
 
     public void printFLoatLog(String msg){
         msg += "\n";
-        if(mLogList.size() > 10){
+        if(mLogList.size() > Pig.getLineNum()){
             mLogList.remove(0);
             mLogList.add(msg);
         } else {

@@ -8,8 +8,6 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.meitu.piglog.window.PigWindow;
-
 /**
  * PigService.java
  * Useage: PigService
@@ -79,7 +77,9 @@ public class PigService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPigWindow.removeFloatWindow();
+        if(mPigWindow != null){
+            mPigWindow.removeFloatWindow();
+        }
         Log.i("zhoufucai", "PigService onDestroy. ");
         getApplication().unregisterActivityLifecycleCallbacks(mActivityCallback);
     }
@@ -88,7 +88,9 @@ public class PigService extends Service {
     // Define Methods
     // ===========================================================
     protected void printlnLog(String message){
-        mPigWindow.printFLoatLog(message);
+        if(mPigWindow != null){
+            mPigWindow.printFLoatLog(message);
+        }
     }
 
     // ===========================================================

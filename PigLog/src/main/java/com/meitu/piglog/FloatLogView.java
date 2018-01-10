@@ -1,16 +1,13 @@
-package com.meitu.piglog.window;
+package com.meitu.piglog;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.meitu.piglog.R;
 
 /**
  * FloatLogView.java
