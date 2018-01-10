@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.meitu.piglog" />
+    package="com.meitu.piglog" >
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <application>
+        <service android:name="com.meitu.piglog.PigService"/>
+    </application>
+</manifest>
+

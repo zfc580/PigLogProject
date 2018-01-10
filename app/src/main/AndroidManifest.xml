@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.meitu.piglogproject">
-  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
   <application
       android:name=".app.PigApplication"
       android:allowBackup="true"
@@ -19,8 +19,6 @@
         android:name="com.meitu.piglogproject.app.second.activity.SecondActivity"
         android:configChanges="orientation|screenSize"
         android:screenOrientation="portrait" />
-    <service android:name="com.meitu.piglog.PigService"/>
   </application>
-
 </manifest>
 

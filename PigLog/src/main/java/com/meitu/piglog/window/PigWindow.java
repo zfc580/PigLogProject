@@ -60,8 +60,6 @@ public class PigWindow {
             return;
         }
         if (mFloatView != null) {
-            int screenWidth = mWindowManager.getDefaultDisplay().getWidth();
-            int screenHeight = mWindowManager.getDefaultDisplay().getHeight();
             if (mFloatParams == null) {
                 mFloatParams = new WindowManager.LayoutParams();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
@@ -75,8 +73,6 @@ public class PigWindow {
                 mFloatParams.gravity = Gravity.START | Gravity.TOP;
                 mFloatParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
                 mFloatParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                mFloatParams.x = screenWidth / 2;
-                mFloatParams.y = screenHeight / 2;
                 mFloatView.setPigWindowParams(mFloatParams);
             }
             try {
