@@ -8,6 +8,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.meitu.piglog.util.PLog;
+
 /**
  * PigService.java
  * Useage: PigService
@@ -52,7 +54,7 @@ public class PigService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i("zhoufucai", "PigService onCreate. ");
+        PLog.i("zhoufucai", "PigService onCreate. ");
         mPigWindow = new PigWindow(this);
         mPigWindow.addFloatWindow();
         getApplication().registerActivityLifecycleCallbacks(mActivityCallback);
@@ -61,14 +63,14 @@ public class PigService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i("zhoufucai", "PigService onBind. ");
+        PLog.i("zhoufucai", "PigService onBind. ");
         return new PigWindowBinder();
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-        Log.i("zhoufucai", "PigService onTrimMemory level = " + level);
+        PLog.i("zhoufucai", "PigService onTrimMemory level = " + level);
         if(level == TRIM_MEMORY_UI_HIDDEN && mPigWindow != null){
             mPigWindow.setVisivity(false);
         }
@@ -80,7 +82,7 @@ public class PigService extends Service {
         if(mPigWindow != null){
             mPigWindow.removeFloatWindow();
         }
-        Log.i("zhoufucai", "PigService onDestroy. ");
+        PLog.i("zhoufucai", "PigService onDestroy. ");
         getApplication().unregisterActivityLifecycleCallbacks(mActivityCallback);
     }
 

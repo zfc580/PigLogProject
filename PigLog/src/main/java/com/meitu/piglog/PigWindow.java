@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.meitu.piglog.util.PLog;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -78,11 +80,10 @@ class PigWindow {
                 } else {
                     mFloatParams.type = WindowManager.LayoutParams.TYPE_TOAST;
                 }
-                Log.i("zhoufucai", "PigWindow addView. ");
+                PLog.i("zhoufucai", "PigWindow addView. ");
                 mWindowManager.addView(mFloatView, mFloatParams);
             }catch (Exception e){
-                Log.i("zhoufucai", "PigWindow addView error. ");
-                e.printStackTrace();
+                PLog.i("zhoufucai", "PigWindow addView error. e = " + e.getMessage());
             }
         }
     }
@@ -101,11 +102,10 @@ class PigWindow {
     void removeFloatWindow(){
         if(mWindowManager != null){
             try {
-                Log.i("zhoufucai", "PigWindow removeView. ");
+                PLog.i("zhoufucai", "PigWindow removeView. ");
                 mWindowManager.removeView(mFloatView);
             }catch (IllegalArgumentException e){
-                Log.i("zhoufucai", "PigWindow removeView error. ");
-                e.printStackTrace();
+                PLog.i("zhoufucai", "PigWindow removeView error. e = " + e.getMessage());
             }
         }
     }

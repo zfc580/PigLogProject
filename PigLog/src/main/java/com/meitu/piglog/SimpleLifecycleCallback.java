@@ -5,6 +5,8 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.meitu.piglog.util.PLog;
+
 /**
  * SimpleLifecycleCallback.java
  * Useage: SimpleLifecycleCallback
@@ -13,44 +15,44 @@ import android.util.Log;
 public class SimpleLifecycleCallback implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityCreated activity = "
+       PLog.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityCreated activity = "
                 + activity.getComponentName().getShortClassName());
     }
 
     @Override
     public void onActivityStarted(Activity activity) {
-        Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStarted activity = "
+       PLog.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStarted activity = "
                 + activity.getComponentName().getShortClassName());
     }
 
     @Override
     public void onActivityResumed(Activity activity) {
-        Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityResumed activity = "
+       PLog.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityResumed activity = "
                 + activity.getComponentName().getShortClassName());
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
-        Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityPaused activity = "
+       PLog.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityPaused activity = "
                 + activity.getComponentName().getShortClassName());
     }
 
     @Override
     public void onActivityStopped(Activity activity) {
-        Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStopped activity = "
+       PLog.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityStopped activity = "
                 + activity.getComponentName().getShortClassName());
 
     }
 
     @Override
     public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-        Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivitySaveInstanceState activity = "
+       PLog.i("zhoufucai", "PigActivityLifecycleCallbacks onActivitySaveInstanceState activity = "
                 + activity.getComponentName().getShortClassName());
     }
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        Log.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityDestroyed activity = "
+       PLog.i("zhoufucai", "PigActivityLifecycleCallbacks onActivityDestroyed activity = "
                 + activity.getComponentName().getShortClassName());
 
     }
