@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.meitu.piglog.common.Pig;
+import com.meitu.piglog.Pig;
 import com.meitu.piglogproject.R;
 import com.meitu.piglogproject.app.main.mvp.MainContract;
 import com.meitu.piglogproject.app.main.mvp.MainPresenter;

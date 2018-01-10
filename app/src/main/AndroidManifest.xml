@@ -19,7 +19,7 @@
         android:name="com.meitu.piglogproject.app.second.activity.SecondActivity"
         android:configChanges="orientation|screenSize"
         android:screenOrientation="portrait" />
-    <service android:name="com.meitu.piglog.common.PigService"/>
+    <service android:name="com.meitu.piglog.PigService"/>
   </application>
 
 </manifest>

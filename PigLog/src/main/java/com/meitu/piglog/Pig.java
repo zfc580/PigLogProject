@@ -1,4 +1,4 @@
-package com.meitu.piglog.common;
+package com.meitu.piglog;
 
 import android.content.ComponentName;
 import android.content.Context;

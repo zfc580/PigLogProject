@@ -42,7 +42,7 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
     // ===========================================================
     // Constructor
     // ===========================================================
-    public FloatLogView(Context context) {
+    FloatLogView(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.pig_float_view, this);
         mDragView = (ImageView) findViewById(R.id.tv_float_drag);
@@ -115,16 +115,15 @@ public class FloatLogView extends RelativeLayout implements View.OnClickListener
         mWindowManager.updateViewLayout(this, mParams);
     }
 
-    public void setPigWindowParams(WindowManager.LayoutParams params){
+    protected void setPigWindowParams(WindowManager.LayoutParams params){
         mParams = params;
     }
 
-    public void setPigWindowManager(WindowManager wm){
+    protected void setPigWindowManager(WindowManager wm){
         mWindowManager = wm;
     }
 
-    public void displayLogs(String log){
-
+    protected void displayLogs(String log){
         mDisplayTextView.setText(log);
     }
 

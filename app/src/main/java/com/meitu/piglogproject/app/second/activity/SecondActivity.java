@@ -1,12 +1,11 @@
 package com.meitu.piglogproject.app.second.activity;
 
-import com.meitu.piglog.common.Pig;
+import com.meitu.piglog.Pig;
 import com.meitu.piglogproject.R;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
 import com.meitu.piglogproject.app.second.mvp.SecondContract;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
