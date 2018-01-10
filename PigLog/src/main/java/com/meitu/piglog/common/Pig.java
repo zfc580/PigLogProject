@@ -30,7 +30,7 @@ public class Pig {
     // ===========================================================
     // Constructor
     // ===========================================================
-    public Pig(Context context){
+    private Pig(Context context){
         mContext = context.getApplicationContext();
         Intent intent = new Intent(mContext, PigService.class);
         mContext.bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
@@ -57,18 +57,22 @@ public class Pig {
     }
 
     private void destroy(){
-        mContext.unbindService(mServiceConnection);
+        if(mContext != null){
+            mContext.unbindService(mServiceConnection);
+        }
     }
 
 
-    public void printLog(String msg){
-        mService.printlnLog(msg);
+    private void printLog(String msg){
+        if(mService != null){
+            mService.printlnLog(msg);
+        }
     }
 
     public static void D(String tag, String msg){
-        StringBuilder sb = new StringBuilder(tag);
-        sb.append(":").append(msg);
-        mInstance.printLog(sb.toString());
+        tag += ":";
+        tag += msg;
+        mInstance.printLog(tag);
     }
 
     // ===========================================================
