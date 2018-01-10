@@ -1,5 +1,6 @@
 package com.meitu.piglog;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -56,17 +57,10 @@ public class PigWindow {
     // Define Methods
     // ===========================================================
     public void addFloatWindow(){
-        if(!isHaveFloatWindowPermission()){
-            return;
-        }
+
         if (mFloatView != null) {
             if (mFloatParams == null) {
                 mFloatParams = new WindowManager.LayoutParams();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                    mFloatParams.type = WindowManager.LayoutParams.TYPE_PHONE;
-                } else {
-                    mFloatParams.type = WindowManager.LayoutParams.TYPE_TOAST;
-                }
                 mFloatParams.format = PixelFormat.RGBA_8888;
                 mFloatParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
@@ -76,27 +70,32 @@ public class PigWindow {
                 mFloatView.setPigWindowParams(mFloatParams);
             }
             try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                    if(!isHaveFloatWindowPermission()){
+                        return;
+                    }
+                    mFloatParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+                } else {
+                    mFloatParams.type = WindowManager.LayoutParams.TYPE_TOAST;
+                }
                 Log.i("zhoufucai", "PigWindow addView. ");
                 mWindowManager.addView(mFloatView, mFloatParams);
-            }catch (IllegalStateException e){
+            }catch (Exception e){
                 Log.i("zhoufucai", "PigWindow addView error. ");
                 e.printStackTrace();
             }
         }
     }
 
+    @TargetApi(23)
     private boolean isHaveFloatWindowPermission(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            boolean canDraw = Settings.canDrawOverlays(mContext);
-            if(!canDraw && !mHadPermitted){
-                mHadPermitted = true;
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-                mContext.startActivity(intent);
-            }
-            return canDraw;
-        } else {
-            return true;
+        boolean canDraw = Settings.canDrawOverlays(mContext);
+        if(!canDraw && !mHadPermitted){
+            mHadPermitted = true;
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+            mContext.startActivity(intent);
         }
+        return canDraw;
     }
 
     public void removeFloatWindow(){
