@@ -1,0 +1,112 @@
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+def isReleaseBuild() {
+    return POM_VERSION_NAME.contains("SNAPSHOT") == false
+}
+
+def getReleaseRepositoryUrl() {
+    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
+            : "http://172.16.3.13:8083/repository/releases/"
+}
+
+def getSnapshotRepositoryUrl() {
+    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
+            : "http://172.16.3.13:8083/repository/snapshots/"
+}
+
+def getRepositoryUsername() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newInputStream())
+
+    def MAVEN_USERNAME_LOCAL = properties.getProperty('MAVEN_USERNAME')
+    return hasProperty('MAVEN_USERNAME') ? MAVEN_USERNAME : MAVEN_USERNAME_LOCAL;
+}
+
+def getRepositoryPassword() {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('gradle.properties').newInputStream())
+
+    def MAVEN_PASSWORD_LOCAL = properties.getProperty('MAVEN_PASSWORD')
+    return hasProperty('MAVEN_PASSWORD') ? MAVEN_PASSWORD : MAVEN_PASSWORD_LOCAL
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                configurePOM(pom)
+                repository(url: getReleaseRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                }
+                snapshotRepository(url: getSnapshotRepositoryUrl()) {
+                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
+                }
+            }
+        }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+
+    task androidJavadocs(type: Javadoc) {
+        failOnError false
+        source = android.sourceSets.main.java.source
+        options {
+            links "http://docs.oracle.com/javase/7/docs/api/"
+            linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
+        }
+//        classpath += project.android.libraryVariants.toList().first().javaCompile.classpath
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    artifacts {
+        //可以指定边缘后的具体文件
+        archives file('../PigLog/build/outputs/aar/PigLog-release.aar')
+//        archives androidSourcesJar
+//        archives androidJavadocsJar
+    }
+}
+
+private configurePOM(def pom) {
+    pom.project {
+        groupId POM_GROUP_ID
+        artifactId POM_ARTIFACT_ID
+        version POM_VERSION_NAME
+        name POM_NAME
+        packaging POM_PACKAGING
+        description POM_DESCRIPTION
+
+        licenses {
+            license {
+                name POM_LICENCE_NAME
+                url POM_LICENCE_URL
+                distribution POM_LICENCE_DIST
+                comments POM_LICENCE_COMMENTS
+            }
+        }
+
+        developers {
+            developer {
+                id POM_DEVELOPER_ID
+                name POM_DEVELOPER_NAME
+                email POM_DEVELOPER_EMAIL
+                url POM_DEVELOPER_URL
+            }
+        }
+
+    }
+}

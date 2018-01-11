@@ -15,3 +15,58 @@
 
 #### 参考图片
 ![悬浮窗](image/pig.gif)
+
+### 1 简介
+**Pig是一个log打印工具，提供一个悬浮窗来展示打印的log，悬浮窗可在屏幕内自由拖动，在项目测试时方便查看关键的log信息。**
+### 2 快速集成
+* **Gradle依赖**
+
+Pig组件库通过aar形式存在美图maven仓库，关于如何配置美图私有maven仓库，请[直戳](http://techgit.meitu.com/android/MavenWiki/wikis/maven_config)。
+对应在主工程下的build.gradle引入pig的库：
+
+```groovy
+dependencies {
+    ...
+    compile "com.meitu.library:pig:1.0.0-SNAPSHOT"
+    ...
+}
+```
+* **调用示例**
+    * 在应用初始化的时候调用Pig组件的初始化接口Pig.init()，如
+    ```java
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            Pig.init(this);
+        }
+    ```
+    * 在应用退出时调用Pig组件的反初始化接口Pig.unInit(),如
+    ```java
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            Pig.unInit();
+        }
+    ```
+    * 在应用需要打印log的时候调用打印log接口Pig.D(), 如
+    ```java
+     Button mShowBtn = (Button) findViewById(R.id.btn_pig_show);
+     mShowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pig.D("Pig", "分辨率：1280*720");
+            }
+        });
+    ```
+    * 设置Pig组件log最多可打印的行数可调用Pig.setLineNum()，如
+    ```java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        PLog.i("zhoufucai", "MainActivity onCreate. ");
+        Pig.init(this);
+        Pig.setLineNum(10); //设置打印行数
+    }
+    ```
+
+
