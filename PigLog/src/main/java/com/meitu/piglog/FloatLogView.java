@@ -91,7 +91,7 @@ public class FloatLogView extends RelativeLayout {
         int targetX = (int) (mXInScreen - mXInView);
         int targetY = (int) (mYInScreen - mYInView);
         if(isUp){
-            if(targetX <= mWindowWidth/2){
+            if(targetX + getWidth()/2 <= mWindowWidth/2){
                 targetX = 0;
             } else {
                 targetX = (int) (mWindowWidth - mXInView);
