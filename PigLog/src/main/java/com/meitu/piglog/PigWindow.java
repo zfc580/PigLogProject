@@ -117,22 +117,33 @@ class PigWindow {
     }
 
     void printFLoatLog(String msg){
-        msg += "\n";
-        if(mLogList.size() > Pig.getLineNum()){
-            mLogList.remove(0);
-            mLogList.add(msg);
+        if(msg.contains("\n")){
+            String[] logs = msg.split("\n");
+            for(String log : logs){
+                storeList(log);
+            }
         } else {
-            mLogList.add(msg);
+            storeList(msg);
         }
+
         StringBuilder stringBuilder = new StringBuilder();
         for(String log: mLogList){
-            stringBuilder.append(log);
+            stringBuilder.append(log).append("\n");
         }
         String targetLogStr = stringBuilder.toString();
         if(targetLogStr.charAt(targetLogStr.length() - 1) == '\n'){
             targetLogStr = targetLogStr.substring(0, targetLogStr.length() - 1);
         }
         mFloatView.displayLogs(targetLogStr);
+    }
+
+    private void storeList(String log){
+        if(mLogList.size() > Pig.getLineNum()){
+            mLogList.remove(0);
+            mLogList.add(log);
+        } else {
+            mLogList.add(log);
+        }
     }
 
     // ===========================================================

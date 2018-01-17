@@ -80,7 +80,7 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
         mShowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Pig.D("Pig", "分辨率：1280*720");
+                Pig.D("分辨率：1280*720\nHello World. \nThinking In Java.");
             }
         });
         mHidenBtn.setOnClickListener(new View.OnClickListener() {

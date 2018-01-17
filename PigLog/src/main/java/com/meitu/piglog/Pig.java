@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.text.TextUtils;
 
 /**
  * Pig.java
@@ -70,9 +71,14 @@ public class Pig {
     }
 
     public static void D(String tag, String msg){
-        tag += ":";
-        tag += msg;
-        mInstance.printLog(tag);
+        if(!TextUtils.isEmpty(tag)){
+            msg = tag + ":" + msg;
+        }
+        mInstance.printLog(msg);
+    }
+
+    public static void D(String msg){
+        mInstance.printLog(msg);
     }
 
     static int getLineNum() {
