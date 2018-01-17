@@ -72,6 +72,7 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
         return new MainPresenter();
     }
 
+    int i = 0;
     @Override
     protected void initViews(Bundle savedInstanceState) {
         setContentView(R.layout.main_activity);
@@ -80,7 +81,7 @@ public class MainActivity extends AbstractMvpActivity<MainContract.Presenter> im
         mShowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Pig.D("分辨率：1280*720\nHello World. \nThinking In Java.");
+                Pig.D("分辨率：1280*720"+ i++ +"\nHello World. \nThinking In Java.");
             }
         });
         mHidenBtn.setOnClickListener(new View.OnClickListener() {

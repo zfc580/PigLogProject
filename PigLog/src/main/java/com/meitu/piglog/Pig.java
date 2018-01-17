@@ -70,13 +70,6 @@ public class Pig {
         }
     }
 
-    public static void D(String tag, String msg){
-        if(!TextUtils.isEmpty(tag)){
-            msg = tag + ":" + msg;
-        }
-        mInstance.printLog(msg);
-    }
-
     public static void D(String msg){
         mInstance.printLog(msg);
     }

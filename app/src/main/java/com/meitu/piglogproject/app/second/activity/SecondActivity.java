@@ -38,13 +38,13 @@ public class SecondActivity extends AbstractMvpActivity<SecondContract.Presenter
         mLogButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Pig.D("Pig", "码率：5990400.0");
+                Pig.D("码率：5990400.0");
             }
         });
         mLogButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Pig.D("Pig", "拍摄时长：0");
+                Pig.D("拍摄时长：0");
             }
         });
     }

@@ -6,15 +6,18 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.meitu.piglog.util.PLog;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * PigWindow.java
@@ -37,6 +40,7 @@ class PigWindow {
     private WindowManager.LayoutParams mFloatParams;
     private FloatLogView mFloatView;
     private List<String> mLogList = new LinkedList<>();
+    private LinkedHashMap<String, String> mLogHashMap = new LinkedHashMap<>();
     private boolean mHadPermitted = false;
 
     // ===========================================================
@@ -117,6 +121,7 @@ class PigWindow {
     }
 
     void printFLoatLog(String msg){
+        //将log分行存储
         if(msg.contains("\n")){
             String[] logs = msg.split("\n");
             for(String log : logs){
@@ -127,9 +132,15 @@ class PigWindow {
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        for(String log: mLogList){
-            stringBuilder.append(log).append("\n");
+        for (String key : mLogHashMap.keySet()) {
+            String value = mLogHashMap.get(key);
+            if(key.equals(value)){
+                stringBuilder.append(key).append("\n");
+            } else {
+                stringBuilder.append(key).append(":").append(value).append("\n");
+            }
         }
+
         String targetLogStr = stringBuilder.toString();
         if(targetLogStr.charAt(targetLogStr.length() - 1) == '\n'){
             targetLogStr = targetLogStr.substring(0, targetLogStr.length() - 1);
@@ -138,12 +149,23 @@ class PigWindow {
     }
 
     private void storeList(String log){
-        if(mLogList.size() > Pig.getLineNum()){
-            mLogList.remove(0);
-            mLogList.add(log);
-        } else {
-            mLogList.add(log);
+        //log行数大于10时，去掉旧的一行
+        if(mLogHashMap.size() >= Pig.getLineNum()){
+            Set<Map.Entry<String, String>> set = mLogHashMap.entrySet();
+            Iterator<Map.Entry<String, String>> iterator = set.iterator();
+            if(iterator.hasNext()){
+                iterator.next();
+                iterator.remove();
+            }
         }
+        //将每一行的log按":"分开，左边的为key，右边为value存储；
+        if(log.contains(":") || log.contains("：")){
+            String[] segments = log.contains(":") ? log.split(":") : log.split("：");
+            mLogHashMap.put(segments[0], segments[1]);
+        } else {
+            mLogHashMap.put(log, log);
+        }
+
     }
 
     // ===========================================================
