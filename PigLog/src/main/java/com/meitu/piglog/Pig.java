@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.text.TextUtils;
 
 /**
  * Pig.java
@@ -70,16 +69,27 @@ public class Pig {
         }
     }
 
+    /**
+     *  将LOG打印在悬浮窗
+     * @param msg 需要打印悬浮窗的字符串
+     */
     public static void D(String msg){
-        mInstance.printLog(msg);
+        if(mInstance != null){
+            mInstance.printLog(msg);
+        }
     }
 
     static int getLineNum() {
+        if(mInstance == null){
+            return 0;
+        }
         return mInstance.mLineNum;
     }
 
     public static void setLineNum(int num){
-        mInstance.mLineNum = num;
+        if(mInstance != null){
+            mInstance.mLineNum = num;
+        }
     }
 
     // ===========================================================

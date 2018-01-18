@@ -159,8 +159,9 @@ class PigWindow {
             }
         }
         //将每一行的log按":"分开，左边的为key，右边为value存储；
-        if(log.contains(":") || log.contains("：")){
-            String[] segments = log.contains(":") ? log.split(":") : log.split("：");
+        boolean isColon = log.contains(":");
+        if(isColon || log.contains("：")){
+            String[] segments = isColon ? log.split(":") : log.split("：");
             mLogHashMap.put(segments[0], segments[1]);
         } else {
             mLogHashMap.put(log, log);
