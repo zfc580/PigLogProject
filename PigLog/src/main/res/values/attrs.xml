@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--圆形-->
+    <declare-styleable name="CircleStyle">
+        <!--圆半径-->
+        <attr name="circleRadius" format="dimension|reference" />
+        <!--圆颜色-->
+        <attr name="circleColor" format="color|reference" />
+
+    </declare-styleable>
+
+</resources>

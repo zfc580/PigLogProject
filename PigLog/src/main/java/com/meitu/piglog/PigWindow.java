@@ -14,8 +14,6 @@ import com.meitu.piglog.util.PLog;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,7 +37,6 @@ class PigWindow {
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mFloatParams;
     private FloatLogView mFloatView;
-    private List<String> mLogList = new LinkedList<>();
     private LinkedHashMap<String, String> mLogHashMap = new LinkedHashMap<>();
     private boolean mHadPermitted = false;
 
@@ -73,6 +70,13 @@ class PigWindow {
                 mFloatParams.gravity = Gravity.START | Gravity.TOP;
                 mFloatParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
                 mFloatParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                mFloatParams.x = 0;
+                WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+                int height = 0;
+                if(wm != null){
+                    height = wm.getDefaultDisplay().getHeight();
+                }
+                mFloatParams.y = height/3 + mFloatView.getHeight()/2;
                 mFloatView.setPigWindowParams(mFloatParams);
             }
             try {
