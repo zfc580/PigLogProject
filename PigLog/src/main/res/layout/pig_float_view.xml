@@ -11,13 +11,13 @@
         android:layout_width="37dp"
         android:layout_height="37dp"
         android:layout_centerVertical="true"
-        android:layout_marginRight="2dp"
         app:circleColor="@color/framework_color_773CED_60"
         app:circleRadius="18dp"/>
     <TextView
         android:id="@+id/tv_float_display"
         android:visibility="gone"
         android:layout_toRightOf="@+id/tv_float_drag"
+        android:layout_marginLeft="2dp"
         android:layout_centerVertical="true"
         android:maxLines="10"
         android:background="@drawable/pig_log_panel_background"
