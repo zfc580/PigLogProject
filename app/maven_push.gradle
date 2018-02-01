@@ -75,13 +75,15 @@ afterEvaluate { project ->
 
     artifacts {
         //可以指定边缘后的具体文件
-        archives file('../PigLog/build/outputs/aar/PigLog-release.aar')
+        //archives file('../PigLog/build/outputs/aar/PigLog-release.aar')
+        archives file('../pig-no-op/build/outputs/aar/pig-no-op-release.aar')
 //        archives androidSourcesJar
 //        archives androidJavadocsJar
     }
 }
 
 private configurePOM(def pom) {
+
     pom.project {
         groupId POM_GROUP_ID
         artifactId POM_ARTIFACT_ID

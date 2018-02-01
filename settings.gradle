@@ -1,1 +1,1 @@
-include ':app', ':PigLog'
+include ':app', ':PigLog', ':pig-no-op'

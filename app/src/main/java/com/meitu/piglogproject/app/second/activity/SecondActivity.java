@@ -1,7 +1,6 @@
 package com.meitu.piglogproject.app.second.activity;
 
 import com.meitu.piglog.Pig;
-import com.meitu.piglog.util.PLog;
 import com.meitu.piglogproject.R;
 import com.meitu.piglogproject.cpmts.context.mvp.AbstractMvpActivity;
 import com.meitu.piglogproject.app.second.mvp.SecondContract;
@@ -57,31 +56,31 @@ public class SecondActivity extends AbstractMvpActivity<SecondContract.Presenter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PLog.i("zhoufucai", "SecondActivity onCreate. ");
+        Log.i("zhoufucai", "SecondActivity onCreate. ");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        PLog.i("zhoufucai", "SecondActivity onStart. ");
+        Log.i("zhoufucai", "SecondActivity onStart. ");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        PLog.i("zhoufucai", "SecondActivity onResume. ");
+        Log.i("zhoufucai", "SecondActivity onResume. ");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        PLog.i("zhoufucai", "SecondActivity onStop. ");
+        Log.i("zhoufucai", "SecondActivity onStop. ");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        PLog.i("zhoufucai", "SecondActivity onDestroy. ");
+        Log.i("zhoufucai", "SecondActivity onDestroy. ");
     }
 
     // ===========================================================
