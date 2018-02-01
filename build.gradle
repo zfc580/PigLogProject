@@ -3,12 +3,15 @@
 buildscript {
     
     repositories {
+        maven {
+            url "http://172.16.3.13:8083/repository/maven-public/"
+        }
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        
+        classpath 'com.meitu.gradle:easymaven:1.2.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,4 +27,40 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    //公共配置GROUP ID和VERSION版本
+    MAVEN_GROUP_ID = 'com.meitu.library'
+    MAVEN_VERSION = '1.1.3'
+
+    MAVEN_REPOSITORY_URL = 'http://172.16.3.13:8083/repository/releases'
+    MAVEN_SNAPSHOT_REPOSITORY_URL = 'http://172.16.3.13:8083/repository/snapshots'
+    def username = getUserName()
+    println 'username = '+ username
+    def password = getPassWord()
+    println 'password = '+ password
+    MAVEN_REPOSITORY_USERNAME = username
+    MAVEN_REPOSITORY_PASSWORD = password
+}
+
+def getPassWord() {
+    if (System.getProperty("MAVEN_PASSWORD")) {
+        return System.getProperty("MAVEN_PASSWORD")
+    } else if (project.hasProperty("MAVEN_PASSWORD")) {
+        return MAVEN_PASSWORD
+    } else {
+        return null
+    }
+
+}
+
+def getUserName() {
+    if (System.getProperty("MAVEN_USERNAME")) {
+        return System.getProperty("MAVEN_USERNAME")
+    } else if (project.hasProperty("MAVEN_USERNAME")) {
+        return MAVEN_USERNAME
+    } else {
+        return null
+    }
 }

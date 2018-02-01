@@ -1,9 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.meitu.maven'
+
+easyMaven {
+    artifactId = 'pig'
+    version = '1.0.5-SNAPSHOT'
+}
+apply plugin: 'com.meitu.maven-publish'
 
 android {
     compileSdkVersion 25
-
-
 
     defaultConfig {
         minSdkVersion 15
