@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.meitu.maven'
 easyMaven {
     artifactId = 'pig-no-op'
-    version = '1.0.5-SNAPSHOT'
+    version = '1.0.6-SNAPSHOT'
 }
 apply plugin: 'com.meitu.maven-publish'
 

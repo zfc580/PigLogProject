@@ -98,13 +98,12 @@ class PigWindow {
 
     @TargetApi(Build.VERSION_CODES.M)
     private boolean isHaveFloatWindowPermission(){
-        boolean canDraw = Settings.canDrawOverlays(mContext);
-        if(!canDraw && !mHadPermitted){
-            mHadPermitted = true;
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-            mContext.startActivity(intent);
-        }
-        return canDraw;
+        return Settings.canDrawOverlays(mContext);
+//        if(!canDraw && !mHadPermitted){
+//            mHadPermitted = true;
+//            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+//            mContext.startActivity(intent);
+//        }
     }
 
     void removeFloatWindow(){
